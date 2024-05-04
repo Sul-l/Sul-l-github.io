@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Sign Up Page</title>
@@ -9,73 +10,119 @@
             background-color: #f4f4f4;
         }
 
-        .container { max-width: 400px; margin: 100px auto; background-color:
-        white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px; }
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color:
+                white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px;
+        }
 
-        .container h1 { text-align: center; margin-bottom: 20px; }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
         .sign-up-form input[type="text"],
         .sign-up-form input[type="email"],
         .sign-up-form input[type="password"] {
             width: 100%;
             padding: 10px;
-            border: 2px solid #bababa; 
+            border: 2px solid #bababa;
             box-sizing: border-box;
-            margin-bottom: 5px}
+            margin-bottom: 5px
+        }
 
-        .sign-up-form input[type="submit"] { width: 100%; 
+        .sign-up-form input[type="submit"] {
+            width: 100%;
             padding: 10px;
-            background-color: #007bff; color: #fff; 
-            border: none; border-radius:5px; 
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 8px}
+            margin-top: 8px
+        }
 
 
         .sign-up-form label {
-            font-weight: bold;}
+            font-weight: bold;
+        }
 
         .sign-up-form p {
-            margin-top: 15px;}
+            margin-top: 15px;
+        }
 
         .login-links {
             text-align: center;
-            margin-bottom: 20px;}
+            margin-bottom: 20px;
+        }
 
         .login-links a {
             text-decoration: none;
             color: #007bff;
-            margin: 10px;}
-        
+            margin: 10px;
+        }
+
         .login-links p {
             text-decoration: none;
             color: #000000;
-            display: inline-block;}
+            display: inline-block;
+        }
 
         .login-links a:hover {
-            text-decoration: underline;}
+            text-decoration: underline;
+        }
     </style>
+    <script>
+        function validateForm() {
+            var username = document.forms["myForm"]["username"].value;
+            var email = document.forms["myForm"]["email"].value;
+            var password = document.forms["myForm"]["password"].value;
+            var confirmPassword = document.forms["myForm"]["confirmPassword"].value;
+
+            if (username == "" || email == "" || password == "" || confirmPassword == "") {
+                alert("All fields cannot be empty");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+        function validateInput(input) {
+            if (input.value == "") {
+                alert(input.name + " field cannot be empty");
+            }
+        }
+    </script>
 </head>
+
 <body>
     <div class="container">
         <h1>Sign Up</h1>
-        
+
         <div class="login-links">
             <a href="sign-in.html" class="sign-in">Sign In</a>
-             <p>Sign Up</p>
+            <p>Sign Up</p>
         </div>
-        
-        <form class="sign-up-form" action="signup.php" method="post">
+
+        <form class="sign-up-form" action="signup.php" onsubmit="return validateForm" method="post">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required />
+            <input type="text" id="username" name="username" onblur="validateInput(this)" />
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required />
+            <input type="email" id="email" name="email" onblur="validateInput(this)" />
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="password" name="password" onblur="validateInput(this)" />
 
             <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required />
+            <input type="password" id="confirm_password" name="confirm_password" onblur="validateInput(this)" />
 
             <input type="submit" value="Sign Up" />
         </form>
@@ -83,4 +130,5 @@
         <p>Already have an account? <a href="sign-in.html">Sign In</a></p>
     </div>
 </body>
+
 </html>

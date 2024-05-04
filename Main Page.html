@@ -1,107 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Qur'an Visualization</title>
-        
-        <style>
-            p { font-family: Arial, sans-serif; margin-left: 40px;}
-            div { margin: 0 auto; padding: 10px; box-shadow: 0, 0, 5px; }
-            div img {width: 30%; border: 1px solid #ccc; padding: 10px;}
-            h1 {font: Arial; margin-top: 1.5em; text-align: center}
-            .subtitle {margin-top: 3em; margin-left: 3.6em; font-style: italic}
-            .TestAlbum {display: flex; justify-content: center; max-width: 800px; margin:0 auto;}
-            .photo {10px; border-color: black; margin-bottom: 50px; border-color: black; background-color: #d9d9d9; margin: 0 10px; text-align: center; max-width: 30%; box-shadow: 0 0 5px; }
-            .photo img {border: 2px solid black; box-shadow: 0 0 5px;}
-            .caption { position: absolute; bottom: 0; left: 0; width: 100%; background-color: gray; opacity: 0; }
-            photo .caption:hover {opacity: 1}
-            ol {font-style: italic; font-family: arial;}
-            li {margin-left: 40px;}
-            h3 {margin-left: 40px; font-family: arial}
-            .footer1 a {margin-left: 40px; margin-top: 70px; text-decoration: none; color: #2a5bba;}
-            footer:hover {text-decoration: underline;}
-            
+<head>
+    <meta charset="UTF-8" />
+    <title>Qur'an Visualization</title>
+    
+    <style>
+        p { font-family: Arial, sans-serif; margin-left: 40px; }
+        div { margin: 0 auto; padding: 10px; box-shadow: 0, 0, 5px; }
+        div img { width: 90%; border: 1px solid #ccc; padding: 10px; }
+        h1 { font: Arial; margin-top: 1.5em; text-align: center; }
+        .subtitle { margin-top: 3em; margin-left: 3.6em; font-style: italic; }
+        .TestAlbum { display: flex; justify-content: center; max-width: 900px; margin:0 auto; }
+        .photo { 10px; border-color: black; margin-bottom: 50px; border-color: black; background-color: #d9d9d9; margin: 0 10px; text-align: center; max-width: 30%; box-shadow: 0 0 5px; }
+        .photo img { border: 2px solid black; box-shadow: 0 0 5px; }
+    </style>
 
-        </style>
-        
-        <!--some functionality is missing, such as captions that will appear when hovering the images. 
-        Our project will provide the user with a list of verses when clicking an image. The verses will be related to the image.
-        We still do not know exactly how we will achieve this. We will also add a link to take the user to the 
-        Log-in and Sign-up Pages here -S. -->
-        
-    </head>
+    <script>
+        const images = [
+            {
+                src: "https://upload.wikimedia.org/wikipedia/commons/7/74/Mount_Uhud.JPG",
+                caption: "This is Mount Uhud, a famous location in Islamic history.",
+                text: "Mount Uhud is located near Medina, Saudi Arabia.\nIt is significant because it was the site of the Battle of Uhud.\n  <li>Surah 'Ali-Imran, Verse 156: <em> O you who have Faith! be not like those who disbelieved and said of their brethren when they travelled in the earth or engaged in fighting: Had they been with us they would not have died and they would not have been killed ; so that Allah may make this a regret in their hearts. And, Allah gives life and causes to die; and Allah sees what you do.</em></li> <br> <br><li>Surah Ali-Imran, Verse 158 <em>And if you die or be killed, certainly to Allah shall you be gathered together</em></li> <br> <br> <li>Surah Ali-Imran, Verse 159 <em>Thus, it is due to the mercy from Allah that you have been lenient with them, and had you been rough, hard hearted, they would certainly have dispersed from around you. Therefore, pardon them and seek forgiveness for them; and consult with them in the affair. So, when you have decided, then trust in Allah; for verily Allah loves those who trust in Him</em></li> <br> <br>"
+            },
+            {
+                src: "https://github.com/Sul-l/358-stuff/blob/main/The_Ka'ba,_Great_Mosque_of_Mecca,_Saudi_Arabia_(4).jpg?raw=true",
+                caption: "This is the Kaaba, the most sacred site in Islam.<br>",
+                text: "<br>The Kaaba is located in Mecca, Saudi Arabia.\nIt is the destination for Hajj.\n  <li>Surah Al-Hajj, Verse 26: <em>And mention, O Muhammad, when We designated for Abraham the site of the House, saying, 'Do not associate anything with Me and purify My House for those who perform Tawaf and those who stand in prayer and those who bow and prostrate.</em></li> <br> <br><li>Surah Al-Baqarah, Verse 144: <em>We have certainly seen the turning of your face, O Muhammad, toward the heaven, and We will surely turn you to a qiblah with which you will be pleased. So turn your face toward al-Masjid al-Haram. And wherever you believers are, turn your faces toward it in prayer. Indeed, those who have been given the Scripture well know that it is the truth from their Lord. And Allah is not unaware of what they do.</em></li> <br> <br> <li>Surah Al-Baqarah, Verse 125: <em>And mention when We made the House a place of return for the people and a place of security. And take, O believers, from the standing place of Abraham a place of prayer. And We charged Abraham and Ishmael, saying, 'Purify My House for those who perform Tawaf and those who are staying there for worship and those who bow and prostrate in prayer.</em></li> <br> <br>"
+            },
+            {
+                src: "https://github.com/Sul-l/358-stuff/blob/main/Green_Dome_of_Madinah.jpg?raw=true",
+                caption: "This is the Masjid al-Nabawi, located in Medina.<br>",
+                text: "Masjid al-Nabawi, also known as the Prophet's Mosque, is located in Medina. It is the burial site of the Prophet Muhammad, Peace be upon him.\n<li>Surah Al-Hujurat, Verse 2: <em>Do not raise your voices above the voice of the Prophet(PBUH), nor speak loudly to him as you speak loudly to one another, lest your deeds become worthless while you do not perceive.</em></li> <br> <br><li>Surah Al-Hujurat, Verse 7: <em>And know that among you is the Messenger of Allah. If he were to obey you in much of the matter, you would be in difficulty, but Allah has endeared to you faith and has made it pleasing in your hearts and has made disbelief, defiance, and disobedience hateful to you. Those are the rightly guided.</em></li> <br> <br> <li>Surah At-Tawbah, Verse 108: <em>Do not stand [for prayer] within it ever. A mosque founded on righteousness from the first day is more worthy for you to stand in. Within it are men who love to purify themselves, and Allah loves those who purify themselves.</em></li> <br> <br>"
+            }
+        ];
+
+        let currentImageIndex = 0;
+
+        function changeImage() {
+            const imageElement = document.getElementById("imageDisplay");
+            const textElement = document.getElementById("imageText");
+            const additionalTextElement = document.getElementById("additionalText");
+
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+
+            imageElement.src = images[currentImageIndex].src;
+            textElement.innerText = images[currentImageIndex].caption;
+
     
-    
-    <body>
+            const textWithLineBreaks = images[currentImageIndex].text.split("\n").join("<br>");
+            additionalTextElement.innerHTML = textWithLineBreaks;
+        }
+    </script>
+</head>
+
+<body>
     <h1 style="font-family: monospace">Welcome to Our Website</h1>
-        <p class="subtitle">Please Click an Image!</p>
-        <br>
-        <div class="TestAlbum"> 
-            
-        <div class="photo"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/The_Ka%27ba%2C_Great_Mosque_of_Mecca%2C_Saudi_Arabia_%284%29.jpg" alt="Kaaba"  >
-            <div>Kaaba</div>
-            <div class="caption">(list of Ayat mentioning the subject that will appar when hovering this image)</div>
-            </div>
-            
-        <div class="photo"> <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Mount_Uhud.JPG" alt="Uhud Mountain"> 
-            <div>Uhud Mountain</div>
-            <div class="caption">(list of Ayat mentioning the subject that will appar when hovering this image)</div>
-            </div>
-            
-        <div class="photo"> <img src="https://blog.umrahme.com/wp-content/uploads/2023/07/sai_history.jpg" alt="Mas'aa">
-            <div>Masaa</div>
-            <div class="caption">(list of Ayat mentioning the subject that will appar when hovering this image)</div>
-            </div>
-            <br>
-            
+    <p class="subtitle">Please Click an Image!</p>
+    <br>
+    <div class="TestAlbum"> 
+        <div class="photo"> 
+            <img id="imageDisplay" src="https://upload.wikimedia.org/wikipedia/commons/7/74/Mount_Uhud.JPG" alt="Image" onclick="changeImage()" /> 
+            <div id="imageText">This is Mount Uhud, a famous mountain mentioned in Islamic history.</div>
+        </div>
     </div>
-        
-        
-        <h1>Introduction</h1>
-            <p>
+
+    <div id="additionalText">
+        Mount Uhud is located near Medina, Saudi Arabia.<br>It is significant because it was the site of the Battle of Uhud. It is mentioned in the Quran 17 times.<br>
+    </div>
+
+    <h1>Introduction</h1>
+    <p>
         Qur’an visualization is set to make the Qur’an easier for any user around the globe.
         It is also essential and instrumental to help any user who intends to memorize the whole or part of the Qur’an.
         It is also to help know the various events which the Qur’an illustrated.
     </p>
+
     <h3>Purpose of the project</h3>
     <p>
-    <ul>
-        <li>
-            a. The main purpose or objective of the project is to enlighten people to know much
-            about the Holy Qur’an and its amazing content from the scientific perspective and more.
-        </li>
-        <li>
-            b. The relevance of this project is to attract Muslims and non-Muslims to get attached to the Qur’an. Also,
-            to teach them the good values the Qur’an
-            encourages and make them live a better life here and hereafter.
-        </li>
-        <li>
-            c. Here are a few tasks users can perform on our website:
-            <ol>
-                <li>
-                     Navigate through images depicting related verses.
-                </li>
-                <li>
-                     Search for exegesis of some verses.
-                </li>
-                <li>
-                     Reason for the revelation of some verses.
-                </li>
-            </ol>
-        </li>
-        <li>
-            d. One key functionality is the search box. This will enable users to be able to explore verses of the
-            Qur’an. Also, there are buttons like the previous and next
-            which will help the user to go back or forward to read verses related to the displayed image.
-        </li>
-    </ul>
+        <ul>
+            <li>
+                a. The main purpose or objective of the project is to enlighten people to know much about the Holy Qur’an and its amazing content from a scientific perspective and more.
+            </li>
+            <li>
+                b. The relevance of this project is to attract Muslims and non-Muslims to get attached to the Qur’an. Also, to teach them the good values the Qur’an encourages and make them live a better life here and hereafter.
+            </li>
+            <li>
+                c. Here are a few tasks users can perform on our website:
+                <ol>
+                    <li>
+                        Navigate through images depicting related verses.
+                    </li>
+                    <li>
+                        Search for exegesis of some verses.
+                    </li>
+                    <li>
+                        Reason for the revelation of some verses.
+                    </li>
+                </ol>
+            </li>
+            <li>
+                d. One key functionality is the search box. This will enable users to explore verses of the Qur'an. Additionally, there are buttons like 'previous' and 'next' to help navigate back or forward to read verses related to the displayed image.
+            </li>
+        </ul>
     </p>
+    
     <br>
-    
-       <footer class="footer1"><a href="About%20Us.html">About Us</a></footer>
-            
-      
-        
-    </body>
-    
+
+    <footer class="footer1">
+        <a href="About%20Us.html">About Us</a>
+    </footer>    
+</body>
+
 </html>

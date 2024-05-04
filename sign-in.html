@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
@@ -67,34 +68,53 @@
             color: #007bff;
             margin: 10px;
         }
+
         .login-links p {
             text-decoration: none;
             color: #000000;
             display: inline-block;
-            
+
         }
 
         .login-links a:hover {
             text-decoration: underline;
         }
     </style>
+    <script>
+        function validateForm() {
+            var username = document.forms["myForm"]["username"].value;
+            var password = document.forms["myForm"]["password"].value;
+
+            if (username == "" || password == "") {
+                alert("All fields cannot be empty");
+                return false;
+            }
+            return true;
+        }
+        function validateInput(input) {
+            if (input.value == "") {
+                alert(input.name + " field cannot be empty");
+            }
+        }
+    </script>
 </head>
+
 <body>
     <div class="container">
         <h1>Login</h1>
-        
+
         <div class="login-links">
-             <p>Sign In</p>
+            <p>Sign In</p>
             <a href="sign-up.html" class="sign-up">Sign Up</a>
-           
+
         </div>
-        
-        <form class="login-form" action="signin.php" method="post">
+
+        <form class="login-form" action="signin.php" onsubmit="return validateForm" method="post">
             <label for="username_or_email">Username or Email:</label>
-            <input type="text" id="username_or_email" name="username_or_email" required />
+            <input type="text" id="username_or_email" name="username_or_email" onblur="validateInput(this)" /> <br>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="password" name="password" onblur="validateInput(this)" /> <br>
 
 
 
@@ -105,4 +125,5 @@
         <p><a href="forgot_password.html">Forgot Password? (NOT FUNCTIONING ATM)</a></p>
     </div>
 </body>
+
 </html>
